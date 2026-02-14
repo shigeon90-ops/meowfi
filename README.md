@@ -67,6 +67,13 @@ Output:
 
 Run EXE as Administrator.
 
+### Build EXE (recommended)
+Use:
+```powershell
+build_exe.bat
+```
+If `assets\logo.png` exists, it will be bundled inside the onefile EXE.
+
 ## Usage
 1. Click `CONNECT SERVICE`
 2. Click `REFRESH ADAPTERS`

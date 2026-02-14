@@ -182,6 +182,12 @@ class App(ctk.CTk):
         if logo_override:
             candidates.append(logo_override)
 
+        # Bundled onefile resources are extracted to sys._MEIPASS.
+        meipass = getattr(sys, "_MEIPASS", None)
+        if meipass:
+            candidates.append(os.path.join(meipass, "assets", "logo.png"))
+            candidates.append(os.path.join(meipass, "logo.png"))
+
         if getattr(sys, "frozen", False):
             exe_dir = os.path.dirname(sys.executable)
             candidates.append(os.path.join(exe_dir, "assets", "logo.png"))
