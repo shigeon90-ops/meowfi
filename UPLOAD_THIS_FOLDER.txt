@@ -1,0 +1,10 @@
+﻿UPLOAD THIS FOLDER TO GITHUB.
+
+What to upload:
+- README.md
+- ARCHITECTURE.md
+- python_meowfi/
+- bin/MeowFi.exe
+- .gitignore
+
+Folder prepared automatically.

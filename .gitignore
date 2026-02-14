@@ -1,0 +1,17 @@
+﻿# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Build outputs
+build/
+dist/
+artifacts/
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+
+# Keep release binary in this repo (optional)
+!bin/MeowFi.exe
