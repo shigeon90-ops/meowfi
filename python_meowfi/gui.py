@@ -15,6 +15,10 @@ import time
 import importlib
 import customtkinter as ctk
 import webbrowser
+try:
+    from PIL import Image
+except Exception:
+    Image = None
 
 ServiceClient = None
 PipeResponse = None
@@ -125,6 +129,7 @@ class App(ctk.CTk):
         self._service_starting = False
         self._service_restarted_once = False
         self.github_url = os.getenv("MEOWFI_GITHUB_URL", DEFAULT_GITHUB_URL).strip() or DEFAULT_GITHUB_URL
+        self._logo_img = None
 
         # --- GRID LAYOUT ---
         # 0 колонку (меню) не растягиваем, 1 (контент) растягиваем
@@ -147,7 +152,8 @@ class App(ctk.CTk):
 
         # Лого
         self.logo = ctk.CTkLabel(self.sidebar, text="MEOW_FI", font=("Segoe UI", 24, "bold"), text_color=COLOR_ACCENT_PURPLE)
-        self.logo.pack(pady=(40, 40))
+        self.logo.pack(pady=(28, 14))
+        self._add_sidebar_logo()
         ctk.CTkLabel(self.sidebar, text=r"/\_/\  NEON CAT", font=("Consolas", 11, "bold"), text_color=COLOR_ACCENT_CYAN).pack(pady=(0, 18))
 
         # Кнопки навигации
@@ -168,6 +174,32 @@ class App(ctk.CTk):
         ).pack(side="bottom", fill="x", padx=20, pady=(0, 8))
         self.lbl_ipc_status = ctk.CTkLabel(self.sidebar, text="IPC: Disconnected", text_color="gray")
         self.lbl_ipc_status.pack(side="bottom", pady=20)
+
+    def _add_sidebar_logo(self) -> None:
+        """Render optional logo from assets/logo.png (if available)."""
+        logo_override = os.getenv("MEOWFI_LOGO_PATH", "").strip()
+        candidates = []
+        if logo_override:
+            candidates.append(logo_override)
+
+        if getattr(sys, "frozen", False):
+            exe_dir = os.path.dirname(sys.executable)
+            candidates.append(os.path.join(exe_dir, "assets", "logo.png"))
+            candidates.append(os.path.join(exe_dir, "logo.png"))
+        else:
+            repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+            candidates.append(os.path.join(repo_root, "assets", "logo.png"))
+            candidates.append(os.path.join(os.getcwd(), "assets", "logo.png"))
+
+        logo_path = next((p for p in candidates if os.path.isfile(p)), None)
+        if not logo_path or Image is None:
+            return
+        try:
+            pil = Image.open(logo_path).convert("RGBA")
+            self._logo_img = ctk.CTkImage(light_image=pil, dark_image=pil, size=(132, 132))
+            ctk.CTkLabel(self.sidebar, text="", image=self._logo_img).pack(pady=(0, 10))
+        except Exception:
+            return
 
     def _build_main_area(self):
         """Container for page content (dashboard / diagnostics)."""
