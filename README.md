@@ -90,40 +90,22 @@ python_meowfi/
   run_service_admin.bat
 ```
 
-## Publish To GitHub
-From project root:
+## Download
+- Latest releases: `https://github.com/shigeon90-ops/meowfi/releases`
+- Direct page: open repository -> `Releases` (right sidebar)
 
-```powershell
-git init
-git add .
-git commit -m "Initial commit: MeowFi Python version"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<your-repo>.git
-git push -u origin main
-```
-
-If repository already exists locally:
+## Update Project
+For normal updates:
 ```powershell
 git add .
-git commit -m "Update README and project files"
+git commit -m "Describe your change"
 git push
 ```
 
-## Recommended `.gitignore`
-```gitignore
-# Python
-__pycache__/
-*.pyc
-.venv/
-
-# Build outputs
-build/
-dist/
-*.spec
-
-# IDE / OS
-.vscode/
-.idea/
-Thumbs.db
-```
-
+## Publish EXE To Releases
+1. Build `dist\MeowFi.exe`
+2. Open: `https://github.com/shigeon90-ops/meowfi/releases`
+3. Click `Draft a new release`
+4. Set tag (example: `v1.0.0`)
+5. Upload `MeowFi.exe` as release asset
+6. Publish release
