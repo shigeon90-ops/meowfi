@@ -2,6 +2,17 @@
 
 MeowFi is a Windows app for sharing internet (including VPN traffic) over a Wi-Fi hotspot.
 
+## Why I built this
+
+I created MeowFi because VPN sharing over Wi-Fi on Windows was unreliable and painful for me in day-to-day use.  
+I was tired of manually tweaking adapters, ICS/NAT behavior, and hotspot settings every time something broke.
+
+MeowFi is a small open-source alternative to paid VPN sharing tools:
+- one app instead of manual Windows network setup
+- simpler adapter flow
+- built-in diagnostics when sharing fails
+- practical focus: make VPN hotspot sharing actually work
+
 Current implementation is Python-based:
 - `python_meowfi/service.py` - local control service (`127.0.0.1:38777`)
 - `python_meowfi/gui.py` - desktop GUI (CustomTkinter)
