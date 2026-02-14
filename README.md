@@ -73,6 +73,8 @@ Use:
 build_exe.bat
 ```
 If `assets\logo.png` exists, it will be bundled inside the onefile EXE.
+If `assets\logo.png` exists, build script also generates `assets\logo.ico`
+and uses it as Windows EXE icon.
 
 ## Usage
 1. Click `CONNECT SERVICE`
